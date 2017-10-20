@@ -1,34 +1,6 @@
-//public class Main {
-//    public static void main(String[] args) {
-//        int stuNum = 3; //学生数
-//        int ability[] = {7,4,7}; //每位同学能力值
-//        int k = 2; //选取学生个数
-//        int d = 2; //间隔
-//        int dpmax[] = new int[stuNum];
-//        int dpmin[] = new int[stuNum];
-//        int temp = 0;
-//        int tempFin = 0;
-//
-//        dpmax = ability;
-//        dpmin = ability;
-//
-//        for(int i = 1; i < k; i++){
-//            for(int j = 0; j <= i; j++){
-//                temp = ability[i] * dpmax[j];
-//                if(dpmax[i] < temp){
-//                    dpmax[i] = temp;
-//                    System.out.println(dpmax[i]);
-//                }
-//            }
-//        }
-//    }
-//}
-
-
 import java.util.Scanner;
 
 public class Main {
-    // 参考 【小刀初试】的算法思想， Java版本，便于理解
     public static void main(String[] args) {
         Scanner cin = new Scanner(System.in);
         while (cin.hasNextInt()) {
@@ -47,18 +19,12 @@ public class Main {
             long  res = Integer.MIN_VALUE; // 记得用Long类型，考虑数值范围
             for (int i = 1; i <=n; i++) {
                 fmax[1][i] = arr[i];
-                System.out.println(fmax[1][i]);
                 fmin[1][i] = arr[i];
-                System.out.println(fmin[1][i]);
-                System.out.println("************");
                 for (int k = 2; k <=K; k++) {
                     for (int j = i-1 ; j > 0 &&  i-j<=d ; j--) {
                         fmax[k][i] = Math.max(fmax[k][i], Math.max(fmax[k-1][j] * arr[i], fmin[k-1][j] * arr[i]));
-                        System.out.println(fmax[k][i]);
                         fmin[k][i] = Math.min(fmin[k][i], Math.min(fmax[k-1][j] * arr[i], fmin[k-1][j] * arr[i]));
-                        System.out.println(fmin[k][i]);
                     }
-                    System.out.println("******************");
                 }
                 res = Math.max(res ,fmax[K][i]);
             }
